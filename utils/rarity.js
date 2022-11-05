@@ -74,17 +74,17 @@ for (var layer in rarityData) {
 }
 
 // print out rarity data
-console.log();
-console.log("Traits Rarity Data ========");
-console.log("===========================");
-console.log();
-for (var layer in rarityData) {
-  console.log(`Trait type: ${layer}`);
-  for (var trait in rarityData[layer]) {
-    console.log(rarityData[layer][trait]);
-  }
-  console.log();
-}
+// console.log();
+// console.log("Traits Rarity Data ========");
+// console.log("===========================");
+// console.log();
+// for (var layer in rarityData) {
+//   console.log(`Trait type: ${layer}`);
+//   for (var trait in rarityData[layer]) {
+//     console.log(rarityData[layer][trait]);
+//   }
+//   console.log();
+// }
 
 // output a sorted list by NFT rarity score
 NFTrarity = []
@@ -100,7 +100,7 @@ data.forEach((element) => {
   });
 
   NFTrarity.push({
-    "edition": element.edition,
+    "name": element.name,
     "score": score
   });
 });
@@ -113,7 +113,7 @@ NFTrarity.sort((a, b) => (a.score > b.score) ? -1 : 1);
 scoreFile = 'NftItemsRarityScore.log';
 fs.writeFileSync(scoreFile, "NFT Rarity Ranking ======== \n Edition, Score\n");
 NFTrarity.forEach((element) => {
-  line = `${element.edition},${element.score}\n`;
+  line = `${element.name},${element.score}\n`;
   fs.appendFile(scoreFile, line, (err) => {
     if (err) {
       console.log(err);
