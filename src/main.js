@@ -7,7 +7,6 @@ const buildDir = `${basePath}/build`;
 const layersDir = `${basePath}/layers`;
 const {
   format,
-  baseUri,
   description,
   background,
   uniqueDnaTorrance,
@@ -133,7 +132,7 @@ const addMetadata = (_dna, _edition) => {
   let tempMetadata = {
     name: `${namePrefix} #${_edition}`,
     description: description,
-    image: `${baseUri}/${_edition}.png`,
+    image: `${_edition}.png`,
     dna: sha1(_dna),
     edition: _edition,
     date: dateTime,
@@ -148,10 +147,8 @@ const addMetadata = (_dna, _edition) => {
       symbol: solanaMetadata.symbol,
       description: tempMetadata.description,
       //Added metadata for solana
-      seller_fee_basis_points: solanaMetadata.seller_fee_basis_points,
       image: `${_edition}.png`,
       //Added metadata for solana
-      external_url: solanaMetadata.external_url,
       edition: _edition,
       ...extraMetadata,
       attributes: tempMetadata.attributes,
@@ -162,8 +159,6 @@ const addMetadata = (_dna, _edition) => {
             type: "image/png",
           },
         ],
-        category: "image",
-        creators: solanaMetadata.creators,
       },
     };
   }
@@ -314,6 +309,7 @@ const saveMetaDataSingleFile = (_editionCount) => {
         `Writing metadata for ${_editionCount}: ${JSON.stringify(metadata)}`
       )
     : null;
+  delete metadata.edition;
   fs.writeFileSync(
     `${buildDir}/json/${_editionCount}.json`,
     JSON.stringify(metadata, null, 2)
