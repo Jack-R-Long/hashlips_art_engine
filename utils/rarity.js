@@ -100,7 +100,7 @@ data.forEach((element) => {
   });
 
   NFTrarity.push({
-    "name": element.name,
+    "name": element.name ,
     "score": score
   });
 });
